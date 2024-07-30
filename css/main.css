@@ -1,0 +1,6 @@
+.erreur {
+  animation: welcomeAnim 3000ms;
+  color: red;
+  font-weight: 300;
+  font-size: 80%;
+}
