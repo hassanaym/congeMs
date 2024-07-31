@@ -76,19 +76,19 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="departementList.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Departments</span></a>
+                    <span>Departements</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="congeList.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Conges</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="congeTypeList.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Conge types</span></a>
             </li>
@@ -123,17 +123,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
                         </button>
                     </form>
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -264,7 +254,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'] ?></span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -348,17 +338,17 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
                                         <?php
                                         foreach ($lst as $e) {
                                             echo "<tr>";
-                                            echo "<td>" . $e->id . "</td>";
+                                            echo "<td>" . $e->id_emp . "</td>";
                                             echo "<td>" . $e->registration . "</td>";
                                             echo "<td>" . $e->firstname . "</td>";
                                             echo "<td>" . $e->lastname . "</td>";
                                             echo "<td>" . $e->dob . "</td>";
                                             echo "<td>" . $e->pob . "</td>";
                                             echo "<td>" . $e->start_date . "</td>";
-                                            echo "<td>" . $e->works . "</td>";
-                                            echo "<td>" . $e->manage . "</td>";
-                                            echo "<td><a href=" . "employeeDelete.php?id=" . $e->id . "><i class='fas fa-folder-minus'></i></a></td>";
-                                            echo "<td><a href=" . "employeeUpdateForm.php?id=" . $e->id . "><i class='fas fa-edit'></i></a></td>";
+                                            echo "<td>" . $e->dep_works . "</td>";
+                                            echo "<td>" . $e->dep_manage . "</td>";
+                                            echo "<td><a href=" . "employeeDelete.php?id=" . $e->id_emp . "><i class='fas fa-folder-minus'></i></a></td>";
+                                            echo "<td><a href=" . "employeeUpdateForm.php?id=" . $e->id_emp . "><i class='fas fa-edit'></i></a></td>";
                                             echo "</tr>";
                                         }
                                         ?>
@@ -378,7 +368,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Conge MS 1.0 AMINE</span>
                     </div>
                 </div>
             </footer>

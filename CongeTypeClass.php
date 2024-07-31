@@ -1,12 +1,13 @@
 <?php
-
 require_once 'dbaccess.php';
 
-class Departement
+
+class CongeType
 {
     private $id;
-    private $name;
-    private $manager; //employee
+    private $typeName;
+    private $numberOfDays;
+    private $db;
 
     public function __construct()
     {
@@ -30,9 +31,9 @@ class Departement
     public function save()
     {
         $dba = new Dbaccess();
-        $dba->query("insert into departement (name, manager) values(
-                                                '"  . $this->name . "',
-                                                '"  . $this->manager . "')");
+        $dba->query("insert into conge_type (type_name, number_of_days) values(
+                                                '"  . $this->typeName . "',
+                                                '"  . $this->numberOfDays . "')");
         $dba->execute();
         return 0;
     }
@@ -40,7 +41,7 @@ class Departement
     public function delete()
     {
         $dba = new Dbaccess();
-        $dba->query("delete from departement where id='" . $this->id . "'");
+        $dba->query("delete from conge_type where id='" . $this->id . "'");
         $dba->execute();
         return 0;
     }
@@ -48,8 +49,8 @@ class Departement
     public function update()
     {
         $dba = new Dbaccess();
-        $dba->query("update departement set name = '" . $this->name . "',
-                                        manager = '"  . $this->manager . "',
+        $dba->query("update congeType set type_name = '" . $this->typeName . "',
+                                        number_of_days = '"  . $this->numberOfDays . "',
                                         where id = '"  . $this->id . "'");
         $dba->execute();
         return 0;
@@ -58,21 +59,21 @@ class Departement
     public function findAll()
     {
         $dba = new Dbaccess();
-        $dba->query("Select *, d.id as id_dep, e.id as id_emp from departement d left join employee e on(d.manager = e.id)");
+        $dba->query("Select * from conge_type");
         return $dba->resultSet();
     }
 
     public function findById()
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from departement where id='" . $this->id . "'");
+        $dba->query("Select * from conge_type where id='" . $this->id . "'");
         return $dba->single();
     }
 
     public function findByName($name)
     {
         $dba = new Dbaccess();
-        $dba->query("Select *, d.id as id_dep, e.id as id_emp from departement d left join employee e on(d.manager = e.id) where name like '%" . $name . "%'");
+        $dba->query("Select * from conge_type where type_name like '%" . $name . "%'");
         return $dba->resultSet();
     }
 
@@ -80,7 +81,7 @@ class Departement
     public function count()
     {
         $dba = new Dbaccess();
-        $dba->query("Select count(*) as nbr from departement");
+        $dba->query("Select count(*) as nbr from conge_type");
         return $dba->rowCount();
     }
 }

@@ -69,19 +69,19 @@ $lst = $dep->findAll();
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="departementList.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Departments</span></a>
+                    <span>Departements</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="congeList.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Conges</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="employeeList.php">
+                <a class="nav-link" href="congeTypeList.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Conge types</span></a>
             </li>
@@ -334,21 +334,21 @@ $lst = $dep->findAll();
 
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <select name="works" id="works" class="form-control form-control-user">
-                                    <option value="">--Departement--</option>
+                                <select name="works" id="works" class="form-control">
+                                    <option value="" selected disabled hidden>--Departement--</option>
                                     <?php
                                     foreach ($lst as $c) {
-                                        echo '<option value="' . $c->id . '">' . $c->name . '</option>';
+                                        echo '<option value="' . $c->id_dep . '">' . $c->name . '</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <select name="manage" id="manage" class="form-control form-control-user">
-                                    <option value="">--Manage--</option>
+                                <select name="manage" id="manage" class="form-control ">
+                                    <option value="" selected disabled hidden>--Manage--</option>
                                     <?php
                                     foreach ($lst as $c) {
-                                        echo '<option value="' . $c->id . '">' . $c->name . '</option>';
+                                        echo '<option value="' . $c->id_dep . '">' . $c->name . '</option>';
                                     }
                                     ?>
                                 </select>

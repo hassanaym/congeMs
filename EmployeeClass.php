@@ -78,7 +78,7 @@ class Employee
     public function findAll()
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from employee");
+        $dba->query("Select *,e.id as id_emp, dw.name as dep_works, dm.name as dep_manage from employee e left join departement dw on(e.works=dw.id) left join departement dm on(e.manage = dm.id)");
         return $dba->resultSet();
     }
 

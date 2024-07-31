@@ -1,8 +1,7 @@
 <?php
 require_once('EmployeeClass.php');
-echo 'ghir hna';
+
 if (isset($_POST['save-employee'])) {
-    echo 'lwast';
     $employee = new Employee();
     $employee->__set("registration", $_POST['registration']);
     $employee->__set("firstname", $_POST['firstname']);
