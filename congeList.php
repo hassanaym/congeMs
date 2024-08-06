@@ -1,12 +1,12 @@
 <?php
 require_once 'session.php';
-require_once('DepartementClass.php');
+require_once('CongeClass.php');
 
-$dep = new Departement();
-if (isset($_POST["name"])) {
-    $lst = $dep->findByName($_POST['name']);
+$cg = new Conge();
+if (isset($_POST["date"])) {
+    $lst = $cg->findByDate($_POST['date']);
 } else {
-    $lst = $dep->findAll();
+    $lst = $cg->findAll();
 }
 ?>
 
@@ -21,7 +21,7 @@ if (isset($_POST["name"])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Conge MS - List of departements</title>
+    <title>Conge MS - List of conge</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,7 @@ if (isset($_POST["name"])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -293,16 +293,16 @@ if (isset($_POST["name"])) {
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="d-sm-flex align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">List of departements</h6>
-                                <a href="departementNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New departement</a>
+                                <h6 class="m-0 font-weight-bold text-primary">List of conges</h6>
+                                <a href="congeNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New conge</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="departementList.php" method="post">
+                            <form action="congeList.php" method="post">
                                 <div class="form-group row">
 
                                     <div class="col-sm-3">
-                                        <input type="search" class="form-control form-control-sm" placeholder="Name" name="name">
+                                        <input type="date" class="form-control form-control-sm" placeholder="Date" name="date">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -316,23 +316,30 @@ if (isset($_POST["name"])) {
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Manager</th>
+                                            <th>Date</th>
+                                            <th>Starts at</th>
+                                            <th>Ends at</th>
+                                            <th>Statuts</th>
+                                            <th>Employee</th>
+                                            <th>Conge type</th>
                                             <th></th>
                                             <th></th>
-
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         <?php
-                                        foreach ($lst as $d) {
+                                        foreach ($lst as $c) {
                                             echo "<tr>";
-                                            echo "<td>" . $d->id_dep . "</td>";
-                                            echo "<td>" . $d->name . "</td>";
-                                            echo "<td>" . $d->firstname . ' ' . $d->lastname . "</td>";
-                                            echo "<td><a href=" . "departementDelete.php?id=" . $d->id_dep . "><i class='fas fa-folder-minus'></i></a></td>";
-                                            echo "<td><a href=" . "departementUpdateForm.php?id=" . $d->id_dep . "><i class='fas fa-edit'></i></a></td>";
+                                            echo "<td>" . $c->id_cng . "</td>";
+                                            echo "<td>" . $c->date . "</td>";
+                                            echo "<td>" . $c->starts_at . "</td>";
+                                            echo "<td>" . $c->ends_at . "</td>";
+                                            echo "<td>" . $c->status . "</td>";
+                                            echo "<td>" . '(' . $c->id_emp . ')'  . $c->firstname . ' ' . $c->lastname . "</td>";
+                                            echo "<td>" . $c->type_name . "</td>";
+                                            echo "<td><a href=" . "congeDelete.php?id=" . $c->id_cng . "><i class='fas fa-folder-minus'></i></a></td>";
+                                            echo "<td><a href=" . "congeUpdateForm.php?id=" . $c->id_cng . "><i class='fas fa-edit'></i></a></td>";
                                             echo "</tr>";
                                         }
                                         ?>

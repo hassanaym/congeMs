@@ -1,13 +1,14 @@
 <?php
 require_once 'session.php';
 require_once('DepartementClass.php');
+require_once('EmployeeClass.php');
+
 
 $dep = new Departement();
-if (isset($_POST["name"])) {
-    $lst = $dep->findByName($_POST['name']);
-} else {
-    $lst = $dep->findAll();
-}
+$lst = $dep->findAll();
+
+$employee = new Employee();
+$emp = $employee->findById($_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -21,17 +22,14 @@ if (isset($_POST["name"])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Conge MS - List of departements</title>
+    <title>Conge MS - Update employee Informations</title>
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -41,7 +39,7 @@ if (isset($_POST["name"])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -117,13 +115,21 @@ if (isset($_POST["name"])) {
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
                     </form>
-
-
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -150,7 +156,11 @@ if (isset($_POST["name"])) {
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -195,7 +205,11 @@ if (isset($_POST["name"])) {
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -254,7 +268,7 @@ if (isset($_POST["name"])) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'] ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -285,62 +299,87 @@ if (isset($_POST["name"])) {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid px-5 pt-3">
 
                     <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">New employee</h1>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <div class="d-sm-flex align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">List of departements</h6>
-                                <a href="departementNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New departement</a>
+                    <form class="user" method="post" action="employeeUpdate.php?id=<?php echo $_GET['id']; ?>">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" placeholder="Regsitration number" name="registration" value="<?php echo $emp->registration; ?>">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user" placeholder="First name" name="firstname" value="<?php echo $emp->firstname; ?>">
                             </div>
                         </div>
-                        <div class="card-body">
-                            <form action="departementList.php" method="post">
-                                <div class="form-group row">
+                        <div class=" form-group">
+                            <input type="text" class="form-control form-control-user" placeholder="Last name" name="lastname" value="<?php echo $emp->lastname; ?>">
+                        </div>
+                        <div class=" form-group row">
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" placeholder="Address" name="address" value="<?php echo $emp->address; ?>">
+                            </div>
+                        </div>
 
-                                    <div class="col-sm-3">
-                                        <input type="search" class="form-control form-control-sm" placeholder="Name" name="name">
-                                    </div>
+                        <div class=" form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="date" class="form-control form-control-user" placeholder="Date of birth" name="dob" value="<?php echo $emp->dob; ?>">
+                            </div>
+                            <div class=" col-sm-6">
+                                <input type="text" class="form-control form-control-user" placeholder="Place of birth" name="pob" value="<?php echo $emp->pob; ?>">
+                            </div>
+                        </div>
 
-                                    <div class="col-sm-3">
-                                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Search</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class=" form-group row">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control form-control-user" placeholder="Repeat Password" name="start-date" value="<?php echo $emp->start_date; ?>">
+                            </div>
+                        </div>
 
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Manager</th>
-                                            <th></th>
-                                            <th></th>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <?php
-                                        foreach ($lst as $d) {
-                                            echo "<tr>";
-                                            echo "<td>" . $d->id_dep . "</td>";
-                                            echo "<td>" . $d->name . "</td>";
-                                            echo "<td>" . $d->firstname . ' ' . $d->lastname . "</td>";
-                                            echo "<td><a href=" . "departementDelete.php?id=" . $d->id_dep . "><i class='fas fa-folder-minus'></i></a></td>";
-                                            echo "<td><a href=" . "departementUpdateForm.php?id=" . $d->id_dep . "><i class='fas fa-edit'></i></a></td>";
-                                            echo "</tr>";
+                        <div class=" form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <select name="works" id="works" class="form-control">
+                                    <option value="" selected disabled hidden>--Departement--</option>
+                                    <?php
+                                    foreach ($lst as $c) {
+                                        if ($c->works === $emp->works) {
+                                            echo '<option value="' . $c->id_dep . '" selected>' . $c->name . '</option>';
+                                        } else {
+                                            echo '<option value="' . $c->id_dep . '">' . $c->name . '</option>';
                                         }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                    }
+
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <select name="manage" id="manage" class="form-control ">
+                                    <option value="" selected disabled hidden>--Manage--</option>
+                                    <?php
+                                    foreach ($lst as $c) {
+                                        if ($c->manage === $emp->manage) {
+                                            echo '<option value="' . $c->id_dep . '" selected>' . $c->name . '</option>';
+                                        } else {
+                                            echo '<option value="' . $c->id_dep . '">' . $c->name . '</option>';
+                                        }
+                                    }
+
+                                    ?>
+                                </select>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <button type="submit" value="" class="btn btn-primary btn-user btn-block col-sm-6 mb-3 mb-sm-0" name="update-employee">Save</button>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                    </form>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -349,10 +388,10 @@ if (isset($_POST["name"])) {
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class=" sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Conge MS 1.0 AMINE</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -397,12 +436,6 @@ if (isset($_POST["name"])) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 

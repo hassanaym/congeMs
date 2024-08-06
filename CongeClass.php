@@ -9,6 +9,7 @@ class Conge
     private $endsAt;
     private $status;
     private $employee;
+    private $congeType;
 
     public function __construct()
     {
@@ -32,12 +33,15 @@ class Conge
     public function save()
     {
         $dba = new Dbaccess();
-        $dba->query("insert into conge (date, starts_at, ends_at, status, employee) values(
+        $sql = "insert into conge (date, starts_at, ends_at, status, conge_type, id_employee) values(
                                                 '" . $this->date . "',
                                                 '"  . $this->startsAt . "',
                                                 '"  . $this->endsAt . "',
-                                                '"  . $this->status . "'
-                                                '"  . $this->employee . "')");
+                                                '"  . $this->status . "',
+                                                '"  . $this->congeType . "',
+                                                '"  . $this->employee . "')";
+
+        $dba->query($sql);
         $dba->execute();
         return 0;
     }
@@ -66,7 +70,7 @@ class Conge
     public function findAll()
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from conge");
+        $dba->query("Select *, c.id as id_cng, e.id as id_emp from conge c inner join employee e on(c.id_employee = e.id) inner join conge_type ct on(ct.id = c.conge_type)");
         return $dba->resultSet();
     }
 

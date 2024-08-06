@@ -1,18 +1,9 @@
 <?php
+require_once('EmployeeClass.php');
 
-if (isset($_POST['save-departement'])) {
-    require_once('DepartementClass.php');
-    $dep = new Departement();
-    $dep->__set("name", $_POST['name']);
-    $dep->__set("manager", $_POST['manager']);
-    $dep->save();
-    header('Location: departementList.php');
-}
-
-if (isset($_POST['save-employee'])) {
-    require_once('EmployeeClass.php');
-
+if (isset($_POST['update-employee'])) {
     $employee = new Employee();
+    $employee->__set("id", $_GET['id']);
     $employee->__set("registration", $_POST['registration']);
     $employee->__set("firstname", $_POST['firstname']);
     $employee->__set("lastname", $_POST['lastname']);
@@ -22,6 +13,6 @@ if (isset($_POST['save-employee'])) {
     $employee->__set("startDate", $_POST['start-date']);
     $employee->__set("works", $_POST['works']);
     $employee->__set("manage", $_POST['manage']);
-    $employee->save();
+    $employee->update();
     header('Location: employeeList.php');
 }

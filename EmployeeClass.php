@@ -67,9 +67,9 @@ class Employee
                                         address = '"  . $this->address . "',
                                         dob = '"  . $this->dob . "',
                                         pob = '"  . $this->pob . "',
-                                        startDate = '"  . $this->startDate . "',
+                                        start_date = '"  . $this->startDate . "',
                                         works = '"  . $this->works . "',
-                                        manage = '"  . $this->manage . "'
+                                        manage = '"  . $this->manage . "' 
                                         where id = '"  . $this->id . "'");
         $dba->execute();
         return 0;
@@ -82,10 +82,10 @@ class Employee
         return $dba->resultSet();
     }
 
-    public function findById()
+    public function findById($id)
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from employee where id='" . $this->id . "'");
+        $dba->query("Select *,e.id as id_emp, dw.name as dep_works, dm.name as dep_manage from employee e left join departement dw on(e.works=dw.id) left join departement dm on(e.manage = dm.id) where e.id='" . $id . "'");
         return $dba->single();
     }
 
