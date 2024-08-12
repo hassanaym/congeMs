@@ -92,7 +92,7 @@ class Employee
     public function findByFirstnameAndLastname($firstname, $lastname)
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from employee where firstname like '%" . $firstname . "%' and lastname like '%" . $lastname . "%'");
+        $dba->query("Select *,e.id as id_emp, dw.name as dep_works, dm.name as dep_manage from employee e left join departement dw on(e.works=dw.id) left join departement dm on(e.manage = dm.id) where firstname like '%" . $firstname . "%' and lastname like '%" . $lastname . "%'");
         return $dba->resultSet();
     }
 

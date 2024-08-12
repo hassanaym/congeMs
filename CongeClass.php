@@ -77,14 +77,14 @@ class Conge
     public function findById()
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from employe where id='" . $this->id . "'");
+        $dba->query("Select *, c.id as id_cng, e.id as id_emp from conge c inner join employee e on(c.id_employee = e.id) inner join conge_type ct on(ct.id = c.conge_type) where id='" . $this->id . "'");
         return $dba->single();
     }
 
     public function findByDate($date)
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from conge where date ='" . $date . "'");
+        $dba->query("Select *, c.id as id_cng, e.id as id_emp from conge c inner join employee e on(c.id_employee = e.id) inner join conge_type ct on(ct.id = c.conge_type) where date ='" . $date . "'");
         return $dba->resultSet();
     }
 
