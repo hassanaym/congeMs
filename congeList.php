@@ -32,6 +32,7 @@ if (isset($_POST["date"])) {
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
 
 </head>
 
@@ -41,10 +42,10 @@ if (isset($_POST["date"])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion purple-color" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
 
                 <div class="sidebar-brand-text mx-3">Conge MS<sup>1.0</sup></div>
             </a>
@@ -54,9 +55,9 @@ if (isset($_POST["date"])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Home</span></a>
             </li>
 
             <!-- Divider -->
@@ -126,7 +127,7 @@ if (isset($_POST["date"])) {
 
 
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav  ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -139,7 +140,7 @@ if (isset($_POST["date"])) {
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
+                                            <button class="btn btn-primary " type="button">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>
@@ -259,20 +260,8 @@ if (isset($_POST["date"])) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+
+                                <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -294,7 +283,7 @@ if (isset($_POST["date"])) {
                         <div class="card-header py-3">
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">List of conges</h6>
-                                <a href="congeNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New conge</a>
+                                <a href="congeNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary purple-color shadow-sm">New conge</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -306,7 +295,7 @@ if (isset($_POST["date"])) {
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Search</button>
+                                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary purple-color shadow-sm">Search</button>
                                     </div>
                                 </div>
                             </form>

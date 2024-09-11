@@ -32,6 +32,7 @@ if (isset($_POST["name"])) {
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 
@@ -41,10 +42,10 @@ if (isset($_POST["name"])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+        <ul class="navbar-nav purple-color sidebar sidebar-dark accordion">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
 
                 <div class="sidebar-brand-text mx-3">Conge MS<sup>1.0</sup></div>
             </a>
@@ -54,9 +55,9 @@ if (isset($_POST["name"])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Home</span></a>
             </li>
 
             <!-- Divider -->
@@ -259,20 +260,8 @@ if (isset($_POST["name"])) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+
+                                <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -294,7 +283,7 @@ if (isset($_POST["name"])) {
                         <div class="card-header py-3">
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">List of departements</h6>
-                                <a href="departementNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New departement</a>
+                                <a href="departementNew.php" class="d-none d-sm-inline-block btn btn-sm btn-primary purple-color shadow-sm">New departement</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -306,7 +295,7 @@ if (isset($_POST["name"])) {
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Search</button>
+                                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary purple-color shadow-sm">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -369,24 +358,7 @@ if (isset($_POST["name"])) {
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
