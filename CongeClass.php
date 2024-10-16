@@ -11,9 +11,7 @@ class Conge
     private $employee;
     private $congeType;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function __get($property)
     {
@@ -89,10 +87,10 @@ class Conge
     }
 
 
-    public function count()
+    public static function count()
     {
         $dba = new Dbaccess();
         $dba->query("Select count(*) as nbr from conge");
-        return $dba->rowCount();
+        return $dba->single();
     }
 }

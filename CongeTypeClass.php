@@ -9,9 +9,7 @@ class CongeType
     private $numberOfDays;
     private $db;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function __get($property)
     {
@@ -78,10 +76,10 @@ class CongeType
     }
 
 
-    public function count()
+    public static function count()
     {
         $dba = new Dbaccess();
         $dba->query("Select count(*) as nbr from conge_type");
-        return $dba->rowCount();
+        return $dba->single();
     }
 }

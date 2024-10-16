@@ -15,9 +15,7 @@ class Employee
     private $manage; //departement
     private $db;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function __get($property)
     {
@@ -97,10 +95,10 @@ class Employee
     }
 
 
-    public function count()
+    public static function count()
     {
         $dba = new Dbaccess();
         $dba->query("Select count(*) as nbr from employee");
-        return $dba->rowCount();
+        return $dba->single();
     }
 }
