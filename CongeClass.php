@@ -72,10 +72,10 @@ class Conge
         return $dba->resultSet();
     }
 
-    public function findById()
+    public function findById($id)
     {
         $dba = new Dbaccess();
-        $dba->query("Select *, c.id as id_cng, e.id as id_emp from conge c inner join employee e on(c.id_employee = e.id) inner join conge_type ct on(ct.id = c.conge_type) where id='" . $this->id . "'");
+        $dba->query("Select *, c.id as id_cng, e.id as id_emp from conge c inner join employee e on(c.id_employee = e.id) inner join conge_type ct on(ct.id = c.conge_type) where c.id='" . $id . "'");
         return $dba->single();
     }
 

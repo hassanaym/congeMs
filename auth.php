@@ -2,7 +2,7 @@
 <?php
 require_once('dbaccess.php');
 
-if ($_POST['rememberMe'] == "1") {
+if ($_POST['rememberMe'] == "on") {
     setcookie('username', $_POST['username'], time() + 60);
     setcookie('password', $_POST['password'], time() + 60);
 }

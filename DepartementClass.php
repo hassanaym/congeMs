@@ -47,7 +47,7 @@ class Departement
     {
         $dba = new Dbaccess();
         $dba->query("update departement set name = '" . $this->name . "',
-                                        manager = '"  . $this->manager . "',
+                                        manager = '"  . $this->manager . "'
                                         where id = '"  . $this->id . "'");
         $dba->execute();
         return 0;
@@ -60,10 +60,10 @@ class Departement
         return $dba->resultSet();
     }
 
-    public function findById()
+    public function findById($id)
     {
         $dba = new Dbaccess();
-        $dba->query("Select * from departement where id='" . $this->id . "'");
+        $dba->query("Select * from departement where id='" . $id . "'");
         return $dba->single();
     }
 
